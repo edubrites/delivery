@@ -1,0 +1,43 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: egbrites
+ * Date: 01/03/17
+ * Time: 18:43
+ */
+
+?>
+
+
+<?php $__env->startSection('content'); ?>
+    <div class="container">
+        <h1>Clientes</h1>
+        <a href="<?php echo e(route('admin.clients.create')); ?>" class="btn btn-default">Novo cliente</a>
+        <br><br>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ação</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($clients as $client): ?>
+                <tr>
+                    <td><?php echo e($client->id); ?></td>
+                    <td><?php echo e($client->user->name); ?></td>
+                    <td><a href="<?php echo e(route('admin.clients.edit',['id'=>$client->id])); ?>" class="btn btn-default btn-sm">Editar</a>
+                        <a href="<?php echo e(route('admin.clients.delete',['id'=>$client->id])); ?>" class="btn btn-default btn-sm">Excluir</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <?php echo $clients->render(); ?>
+
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
