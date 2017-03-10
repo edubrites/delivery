@@ -24,7 +24,6 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         return User::class;
     }
 
-    
 
     /**
      * Boot up the repository, pushing criteria
@@ -32,5 +31,14 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    /**
+     * Recupera o Nome e o ID do usuário com papel deliveryman
+     * @return mixed
+     */
+    public function getDeliverymen()
+    {
+        return $this->model->where(['role'=>'deliveryman'])->lists('name','id');
     }
 }

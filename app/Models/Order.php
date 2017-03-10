@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Client;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -14,17 +16,22 @@ class Order extends Model implements Transformable
         'client_id',
         'user_deliveryman_id',
         'total',
-        'status'
+        'status',
     ];
 
     public function items()
     {
-        return $this->hasMany(OrdemItem::class);
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
     }
 
     public function deliveryman()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_deliveryman_id' , 'id');
     }
 
     public function products()

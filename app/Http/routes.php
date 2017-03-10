@@ -14,7 +14,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 
@@ -39,5 +39,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth.checkrole', 'as'=>'admin.'],
     Route::post('products/update/{id}', ['as'=>'products.update', 'uses'=>'ProductsController@update']);
     Route::get('products/delete/{id}', ['as'=>'products.delete', 'uses'=>'ProductsController@delete']);
     Route::post('products/store', ['as'=>'products.store', 'uses'=>'ProductsController@store']);
+
+    Route::get('orders',  ['as'=>'orders.index', 'uses'=>'OrdersController@index']);
+    Route::get('orders/{id}',  ['as'=>'orders.edit', 'uses'=>'OrdersController@edit']);
+    Route::post('orders/update/{id}',  ['as'=>'orders.update', 'uses'=>'OrdersController@update']);
 
 });
