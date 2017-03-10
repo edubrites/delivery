@@ -38,5 +38,9 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\UserRepository',
             'App\Repositories\UserRepositoryEloquent'
         );
+        $this->app->bind(
+            'App\Repositories\CupomRepository',
+            'App\Repositories\CupomRepositoryEloquent'
+        );
     }
 }
