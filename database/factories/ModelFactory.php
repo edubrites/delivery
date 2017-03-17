@@ -63,3 +63,10 @@ $factory->define(App\Models\Cupom::class, function (Faker\Generator $faker) {
         'value' => rand(50, 100),
     ];
 });
+
+$factory->define(App\Models\OAuthClient::class, function (Faker\Generator $faker) {
+        return [
+                'secret' => $faker->word,
+                'name' => $faker->word,
+            ];
+ });
