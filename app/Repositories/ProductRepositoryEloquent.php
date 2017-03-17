@@ -4,9 +4,9 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\ProductRepository;
+//use App\Repositories\ProductRepository;
 use App\Models\Product;
-use App\Validators\ProductValidator;
+//use App\Validators\ProductValidator;
 
 /**
  * Class ProductRepositoryEloquent
@@ -14,6 +14,12 @@ use App\Validators\ProductValidator;
  */
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
+
+
+    public function list()
+    {
+        return $this->model->get(['id', 'name', 'price'] );
+    }
 
     /**
      * Specify Model class name
@@ -24,8 +30,6 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     {
         return Product::class;
     }
-
-
 
     /**
      * Boot up the repository, pushing criteria
