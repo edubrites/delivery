@@ -32,7 +32,7 @@
                     <tr>
                         <td>{{$order->id}}</td>
                         <td>{{$order->total}}</td>
-                        <td>{{$order->status}}</td>
+                        <td>{{$status_list[$order->status]}}</td>
                     </tr>
                 @endforeach
                 </tbody>

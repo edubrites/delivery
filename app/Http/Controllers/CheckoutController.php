@@ -41,14 +41,16 @@ class CheckoutController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function index()
+    public function index(OrdersController $ordersController)
     {
+        $status_list = $ordersController->getStatusOrder();
+
         $clientId = $this->userRepository->find(Auth::user()->id)->client->id;
         $orders = $this->repository->scopeQuery(function ($query) use($clientId) {
             return $query->where('client_id', '=', $clientId);
         })->paginate();
 
-        return view('customer.order.index',compact('orders'));
+        return view('customer.order.index',compact('orders','status_list'));
     }
 
     public function create()
