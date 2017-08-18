@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\OrdersController;
 use App\Repositories\OrderRepository;
-use App\Repositories\ProductRepository;
 use App\Repositories\UserRepository;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
@@ -26,21 +25,15 @@ class ClientCheckoutController extends Controller
      * @var UserRepository
      */
     private $userRepository;
-    /**
-     * @var ProductRepository
-     */
-    private $productRepository;
 
     public function __construct(
         OrderRepository $repository,
         UserRepository $userRepository,
-        ProductRepository $productRepository,
         OrderService $orderService
     )
     {
         $this->repository = $repository;
         $this->userRepository = $userRepository;
-        $this->productRepository = $productRepository;
         $this->orderService = $orderService;
     }
 
@@ -60,7 +53,7 @@ class ClientCheckoutController extends Controller
     public function show($id)
     {
 
-        $order = $this->repository->with(['client','items'])->find($id);
+        $order = $this->repository->with(['client','items','cupom'])->find($id);
 
         $order->items->each( function($item){
             $item->product;
