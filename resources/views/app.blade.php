@@ -35,7 +35,7 @@
 
                 @if(Auth::user())
                     @if(Auth::user()->role == 'admin')
-                        <li><a href="{{ url('/') }}">Home</a></li>
+                        <li><a href="{{ url('/home') }}">Home</a></li>
                         <li><a href="{{ route('admin.categories.index') }}">Categorias</a></li>
                         <li><a href="{{ route('admin.products.index') }}">Produtos</a></li>
                         <li><a href="{{ route('admin.clients.index') }}">Clientes</a></li>

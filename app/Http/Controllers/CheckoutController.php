@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+//use App\Http\Requests\CheckoutRequest;
 use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\UserRepository;

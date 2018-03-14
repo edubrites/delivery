@@ -27,6 +27,7 @@
                     <th>Total</th>
                     <th>Status</th>
                 </tr>
+                </thead>
                 <tbody>
                 @foreach($orders as $order)
                     <tr>
@@ -36,7 +37,7 @@
                     </tr>
                 @endforeach
                 </tbody>
-                </thead>
+
             </table>
         </div>
 

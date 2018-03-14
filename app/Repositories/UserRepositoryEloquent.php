@@ -6,7 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\UserRepository;
 use App\Models\User;
-use App\Validators\UserValidator;
+//use App\Validators\UserValidator;
 
 /**
  * Class UserRepositoryEloquent
@@ -14,6 +14,7 @@ use App\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
@@ -40,5 +41,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function getDeliverymen()
     {
         return $this->model->where(['role'=>'deliveryman'])->lists('name','id');
+    }
+
+    public function presenter()
+    {
+        return \CodeDelivery\Presenters\UserPresenter::class;
     }
 }

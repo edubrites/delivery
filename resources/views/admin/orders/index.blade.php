@@ -35,7 +35,7 @@
                 <th>Total</th>
                 <th>Data</th>
                 <th>Itens</th>
-                <th>Intregador</th>
+                <th>Entregador</th>
                 <th>Status</th>
                 <th>Ação</th>
             </tr>
@@ -63,7 +63,7 @@
                     <td>{{ $list_status[$order->status] }}</td>
                     <td>
                         <a href="{{ route('admin.orders.edit', ['id'=>$order->id]) }}" class="btn btn-default btn-sm">Editar</a>
-                        <a href="" class="btn btn-default btn-sm">Excluir</a>
+                        <a href="{{ route('admin.orders.destroy', ['id'=>$order->id]) }}" class="btn btn-default btn-sm">Excluir</a>
                     </td>
                 </tr>
             @endforeach

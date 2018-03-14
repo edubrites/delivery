@@ -17,6 +17,15 @@ class OrderItem extends Model implements Transformable
         'qtd'
     ];
 
+    public function transform()
+    {
+        return [
+            'order_item'=> $this->id,
+            'price'=> $this->price,
+            'qtd'=> $this->qtd,
+        ];
+    }
+
     public function order()
     {
         return $this->belongsTo(Order::class);

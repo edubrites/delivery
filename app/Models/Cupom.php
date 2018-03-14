@@ -16,5 +16,12 @@ class Cupom extends Model implements Transformable
     ];
 
 
+    public function transform()
+    {
+        return [
+            'cupom'=> $this->id,
+            'code'=> $this->code,
+        ];
+    }
 
 }

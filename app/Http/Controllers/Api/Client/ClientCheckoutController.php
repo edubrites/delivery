@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\OrdersController;
+use App\Http\Requests\AdminClientRequest;
+use App\Http\Requests\CheckoutRequest;
 use App\Repositories\OrderRepository;
 use App\Repositories\UserRepository;
 use App\Services\OrderService;
@@ -26,6 +28,8 @@ class ClientCheckoutController extends Controller
      */
     private $userRepository;
 
+    private $with = ['client', 'cupom', 'items'];
+
     public function __construct(
         OrderRepository $repository,
         UserRepository $userRepository,
@@ -43,39 +47,39 @@ class ClientCheckoutController extends Controller
 
         $id = Authorizer::getResourceOwnerID();
         $clientId = $this->userRepository->find($id)->client->id;
-        $orders = $this->repository->with(['items'])->scopeQuery(function ($query) use($clientId) {
-            return $query->where('client_id', '=', $clientId);
-        })->paginate();
+        $orders = $this->repository
+            ->skipPresenter(false)
+            ->with($this->with)
+            ->scopeQuery(function ($query) use ($clientId) {
+                return $query->where('client_id', '=', $clientId);
+            })->paginate();
 
         return $orders;
+    }
+
+    public function store(CheckoutRequest $request)
+    {
+        $data = $request->all();
+        $id = Authorizer::getResourceOwnerID();
+        $clientId = $this->userRepository->find($id)->client->id;
+        $data['client_id'] = $clientId;
+        $order = $this->orderService->create($data);
+//        $order = $this->repository->with('items')->find($order->id);
+
+        return $this->repository
+            ->skipPresenter(false)
+            ->with($this->with)
+            ->find($order->id);
     }
 
     public function show($id)
     {
 
-        $order = $this->repository->with(['client','items','cupom'])->find($id);
-
-        $order->items->each( function($item){
-            $item->product;
-        });
+        $order = $this->repository
+            ->skipPresenter(false)
+            ->with($this->with)->find($id);
 
         return $order;
 
-    }
-
-    public function store(Request $request)
-    {
-        $data = $request->all();
-
-        $id = Authorizer::getResourceOwnerID();
-
-        $clientId = $this->userRepository->find($id)->client->id;
-
-        $data['client_id'] = $clientId;
-
-        $order = $this->orderService->create($data);
-        $order = $this->repository->with('items')->find($order->id);
-
-        return $order;
     }
 }

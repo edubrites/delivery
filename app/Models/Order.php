@@ -17,16 +17,31 @@ class Order extends Model implements Transformable
         'user_deliveryman_id',
         'total',
         'status',
+        'cupom_id',
     ];
 
-    public function items()
+    public function transform()
     {
-        return $this->hasMany(OrderItem::class);
+        return [
+          'order'=> $this->id,
+          'order_items'=> $this->items,
+        ];
     }
 
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function cupom()
+    {
+        return $this->belongsTo(Cupom::class);
+    }
+
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 
     public function deliveryman()
