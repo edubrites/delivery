@@ -45,6 +45,6 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     public function presenter()
     {
-        return \CodeDelivery\Presenters\UserPresenter::class;
+        return \App\Presenters\UserPresenter::class;
     }
 }
