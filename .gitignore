@@ -15,3 +15,8 @@ bootstrap/cache/
 .rocketeer/
 
 .idea/
+.DS_Store
+*/.DS_Store
+
+public/info.php
+*.sql
