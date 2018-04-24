@@ -18,7 +18,7 @@ angular.module('starter.controllers', [])
                             title: 'Advertência',
                             template: 'Login e/ou senha inválido(s)'
                         });
-                        console.debug(responseError);
+                        //console.debug(responseError);
                     });
             }
         }

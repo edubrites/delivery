@@ -2,6 +2,7 @@ angular.module('starter.controllers')
     .controller('HomeCtrl',
         ['$scope', '$cookies', '$http',
             function ($scope, $cookies, $http) {
+                // console.log(meuValue);
                 $scope.user = '';
                 $http({
                     method: 'GET',
