@@ -3,53 +3,56 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
+
+angular.module('starter.controllers', []);
+
 angular.module('starter', [
     'ionic','starter.controllers','angular-oauth2'
 ])
-    .provider('calculadorDeArea', function () {
-
-        var o = {
-            calcular: function () {
-                return this.largura * this.comprimento;
-            }
-        };
-
-        return {
-            $get: function () {
-                o.largura = this.largura;
-                o.comprimento = this.comprimento;
-                return o;
-            }
-        }
-    })
-    .factory('meuFactory', ['OAuth', '$http', function (a, ajax) {
-        //a.getAccessToken({username:'teste@teste.com',password:'Teste'});
-        //ajax.get();
-        return {
-            largura: 40,
-            comprimento: 40,
-            minhaFuncao: function () {
-                //console.log("Factory: " + this.largura * this.comprimento);
-            }
-        }
-    }])
-    .service('meuService', ['OAuth', '$http', function (a, ajax) {
-        // a.getAccessToken({username:'teste@teste.com',password:'Teste'});
-        // ajax.get();
-        this.largura = 40;
-        this.comprimento = 40;
-        this.minhaFuncao = function () {
-            //console.log("Service: "+ this.largura * this.comprimento);
-        };
-    }])
-    .constant("meuConstant",{
-        name: "Eduardo Brites",
-        endereco: "Rua aaaaa",
-        minhaFuncao: function () {
-            //console.log("minha função dentro do meuConstant");
-        }
-    })
-    .run(function ($ionicPlatform, meuConstant, meuService,meuFactory) {
+    // .provider('calculadorDeArea', function () {
+    //
+    //     var o = {
+    //         calcular: function () {
+    //             return this.largura * this.comprimento;
+    //         }
+    //     };
+    //
+    //     return {
+    //         $get: function () {
+    //             o.largura = this.largura;
+    //             o.comprimento = this.comprimento;
+    //             return o;
+    //         }
+    //     }
+    // })
+    // .factory('meuFactory', ['OAuth', '$http', function (a, ajax) {
+    //     //a.getAccessToken({username:'teste@teste.com',password:'Teste'});
+    //     //ajax.get();
+    //     return {
+    //         largura: 40,
+    //         comprimento: 40,
+    //         minhaFuncao: function () {
+    //             //console.log("Factory: " + this.largura * this.comprimento);
+    //         }
+    //     }
+    // }])
+    // .service('meuService', ['OAuth', '$http', function (a, ajax) {
+    //     // a.getAccessToken({username:'teste@teste.com',password:'Teste'});
+    //     // ajax.get();
+    //     this.largura = 40;
+    //     this.comprimento = 40;
+    //     this.minhaFuncao = function () {
+    //         //console.log("Service: "+ this.largura * this.comprimento);
+    //     };
+    // }])
+    // .constant("meuConstant",{
+    //     name: "Eduardo Brites",
+    //     endereco: "Rua aaaaa",
+    //     minhaFuncao: function () {
+    //         //console.log("minha função dentro do meuConstant");
+    //     }
+    // })
+    .run(function ($ionicPlatform/*, meuConstant, meuService,meuFactory*/) {
         // meuFactory.largura = 100;
         // meuService.largura = 200;
         // meuService.minhaFuncao();
@@ -72,9 +75,9 @@ angular.module('starter', [
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider,
-                      meuConstant,calculadorDeAreaProvider) {
-        calculadorDeAreaProvider.largura = 50;
-        calculadorDeAreaProvider.comprimento= 50;
+                      /*meuConstant,calculadorDeAreaProvider*/) {
+        // calculadorDeAreaProvider.largura = 50;
+        // calculadorDeAreaProvider.comprimento= 50;
 
         OAuthProvider.configure({
             baseUrl: 'http://10.211.55.9',
@@ -100,12 +103,36 @@ angular.module('starter', [
                 url: '/home',
                 templateUrl: 'templates/home.html',
                 // controller: 'HomeCtrl'
-                controller: function ($scope, meuConstant,meuService, meuFactory,calculadorDeArea) {
-                   console.log(calculadorDeArea.calcular());
-                   // console.log(meuValue);
-                    meuConstant.minhaFuncao();
-                    meuFactory.minhaFuncao();
+                controller: function ($scope) {
+                   //
+                   // // console.log(meuValue);
+                   //  meuConstant.minhaFuncao();
+                   //  meuFactory.minhaFuncao();
                 }
-            });
+            })
+            .state('client',{
+                abstract: true,
+                url: '/client',
+                template: '<ui-view/>'
+            })
+            .state('client.checkout', {
+                url: '/checkout',
+                templateUrl: 'templates/client/checkout.html',
+                controller: 'ClientCheckoutCtrl'
+            })
+            .state('client.checkout_item_detail', {
+                url: '/checkout/detail/:index',
+                templateUrl: 'templates/client/checkout_item_detail.html',
+                controller: 'ClientCheckoutDetailCtrl'
+            })
+            .state('client.view_products', {
+                url: '/view_products',
+                templateUrl: 'templates/client/view_products.html',
+                controller: 'ClientViewProductsCtrl'
+            })
+
+        ;
+
+
        // $urlRouterProvider.otherwise('/');
     });
