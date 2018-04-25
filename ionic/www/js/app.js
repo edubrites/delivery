@@ -5,9 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 
 angular.module('starter.controllers', []);
+angular.module('starter.services', []);
 
 angular.module('starter', [
-    'ionic','starter.controllers','angular-oauth2'
+    'ionic','starter.controllers', 'starter.services','angular-oauth2', 'ngResource'
 ])
     // .provider('calculadorDeArea', function () {
     //
@@ -45,18 +46,10 @@ angular.module('starter', [
     //         //console.log("Service: "+ this.largura * this.comprimento);
     //     };
     // }])
-    // .constant("meuConstant",{
-    //     name: "Eduardo Brites",
-    //     endereco: "Rua aaaaa",
-    //     minhaFuncao: function () {
-    //         //console.log("minha função dentro do meuConstant");
-    //     }
-    // })
-    .run(function ($ionicPlatform/*, meuConstant, meuService,meuFactory*/) {
-        // meuFactory.largura = 100;
-        // meuService.largura = 200;
-        // meuService.minhaFuncao();
-        // meuFactory.minhaFuncao();
+    .constant("appConfig",{
+        baseUrl: 'http://10.211.55.9'
+    })
+    .run(function ($ionicPlatform/*, meuService,meuFactory*/) {
 
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -74,13 +67,11 @@ angular.module('starter', [
             }
         });
     })
-    .config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider,
-                      /*meuConstant,calculadorDeAreaProvider*/) {
-        // calculadorDeAreaProvider.largura = 50;
-        // calculadorDeAreaProvider.comprimento= 50;
+    .config(function ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, appConfig
+                      /*calculadorDeAreaProvider*/) {
 
         OAuthProvider.configure({
-            baseUrl: 'http://10.211.55.9',
+            baseUrl: appConfig.baseUrl,
             clientId: 'appid01',
             clientSecret: 'secret', // optional
             grantPath: '/oauth/access_token'
