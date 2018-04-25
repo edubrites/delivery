@@ -63,9 +63,7 @@ function OAuthTokenProvider() {
        */
 
       getAccessToken() {
-        const { access_token } = this.getToken() || {};
-
-        return access_token;
+        return this.getToken() ? this.getToken().access_token : undefined;
       }
 
       /**
@@ -73,14 +71,11 @@ function OAuthTokenProvider() {
        */
 
       getAuthorizationHeader() {
-        const tokenType = this.getTokenType();
-        const accessToken = this.getAccessToken();
-
-        if (!tokenType || !accessToken) {
+        if (!(this.getTokenType() && this.getAccessToken())) {
           return;
         }
 
-        return `${tokenType.charAt(0).toUpperCase() + tokenType.substr(1)} ${accessToken}`;
+        return `${this.getTokenType().charAt(0).toUpperCase() + this.getTokenType().substr(1)} ${this.getAccessToken()}`;
       }
 
       /**
@@ -88,9 +83,7 @@ function OAuthTokenProvider() {
        */
 
       getRefreshToken() {
-        const { refresh_token } = this.getToken() || {};
-
-        return refresh_token;
+        return this.getToken() ? this.getToken().refresh_token : undefined;
       }
 
       /**
@@ -98,9 +91,7 @@ function OAuthTokenProvider() {
        */
 
       getTokenType() {
-        const { token_type } = this.getToken() || {};
-
-        return token_type;
+        return this.getToken() ? this.getToken().token_type : undefined;
       }
 
       /**
