@@ -1,7 +1,7 @@
 {
   "name": "ionic",
-  "version": "1.1.0",
-  "codename": "xenon-xerus",
+  "version": "1.1.1",
+  "codename": "yttrium-yeti",
   "homepage": "https://github.com/driftyco/ionic",
   "authors": [
     "Max Lynch <max@drifty.com>",
@@ -32,7 +32,6 @@
     "angular": "1.4.3",
     "angular-animate": "1.4.3",
     "angular-sanitize": "1.4.3",
-    "angular-ui-router": "0.2.13",
-    "angular-oauth2": "^4.2.0"
+    "angular-ui-router": "0.2.13"
   }
 }
