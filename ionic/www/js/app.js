@@ -104,26 +104,33 @@ angular.module('starter', [
             .state('client',{
                 abstract: true,
                 url: '/client',
-                template: '<ui-view/>'
+                template: '<ion-nav-view/>'
             })
             .state('client.checkout', {
+                cache:false,
                 url: '/checkout',
                 templateUrl: 'templates/client/checkout.html',
                 controller: 'ClientCheckoutCtrl'
             })
             .state('client.checkout_item_detail', {
+                cache:false,
                 url: '/checkout/detail/:index',
                 templateUrl: 'templates/client/checkout_item_detail.html',
                 controller: 'ClientCheckoutDetailCtrl'
+            })
+            .state('client.checkout_successful',{
+                cache:false,
+                url: '/checkout/successful',
+                templateUrl: 'templates/client/checkout_successful.html',
+                controller: 'ClientCheckoutSuccessfulCtrl'
             })
             .state('client.view_products', {
                 url: '/view_products',
                 templateUrl: 'templates/client/view_products.html',
                 controller: 'ClientViewProductsCtrl'
             })
-
-        ;
-
-
        // $urlRouterProvider.otherwise('/');
-    });
+    })
+    .service('cart', function () {
+        this.items = [];
+    })
