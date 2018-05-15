@@ -1,7 +1,7 @@
 angular.module('starter.controllers')
     .controller('ClientViewProductsCtrl', [
-        '$scope', '$state', 'Product', '$ionicLoading', '$cart',
-        function ($scope, $state, Product, $ionicLoading, $cart) {
+        "$scope", "$state", "Product", "$ionicLoading", "$cart", "$ionicPopup",
+        function($scope, $state, Product, $ionicLoading, $cart, $ionicPopup){
 
             $scope.products = [];
             $ionicLoading.show({
@@ -13,6 +13,10 @@ angular.module('starter.controllers')
                 $ionicLoading.hide();
             }, function (dataError) {
                 $ionicLoading.hide();
+                $ionicPopup.alert({
+                    title: "Problemas em exibir os produtos",
+                    template: "dataError = " + JSON.stringify(dataError)
+                });
             });
 
             $scope.addItem = function (item) {

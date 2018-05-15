@@ -45,11 +45,11 @@ angular.module('starter.services')
         };
 
         this.updateQtd = function (i,qtd) {
-            var cart = this.get(),
-                itemAux = cart.items[i];
+            var cart = this.get(), itemAux = cart.items[i];
             itemAux.qtd = qtd;
             itemAux.subtotal = calculateSubTotal(itemAux);
             cart.total = getTotal(cart.items);
+            console.log('cart.total = ' + cart.total);
             $localStorage.setObject(key,cart);
         };
 

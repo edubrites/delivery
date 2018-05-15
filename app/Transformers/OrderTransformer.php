@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Http\Controllers\OrdersController;
 use League\Fractal\TransformerAbstract;
 use App\Models\Order;
 
@@ -25,7 +26,9 @@ class OrderTransformer extends TransformerAbstract
         return [
             'id' => (int)$model->id,
             'total' => (float)$model->total,
+            'items' => $model->items,
             'status' => (int)$model->status,
+            'status_name' => $this->getStatusOrder((int)$model->status),
 
             /* place your other model properties here */
 
@@ -56,5 +59,16 @@ class OrderTransformer extends TransformerAbstract
     public function includeDeliveryman(Order $model)
     {
         return $this->item($model->deliveryman, new DeliverymanTransformer());
+    }
+
+    public function getStatusOrder($status=false)
+    {
+        $list_status = [0 => 'Pendente', 1 => 'A Caminho', 2 => 'Entregue', 3 => 'Cancelado'];
+
+        if(isset($status)){
+            return $list_status[$status];
+        }else{
+            return $list_status;
+        }
     }
 }

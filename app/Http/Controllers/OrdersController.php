@@ -50,8 +50,8 @@ class OrdersController extends Controller
     {
         $list_status = [0 => 'Pendente', 1 => 'A Caminho', 2 => 'Entregue', 3 => 'Cancelado'];
 
-        if(isset($tatus)){
-            return $list_status[$tatus];
+        if(isset($status)){
+            return $list_status[$status];
         }else{
             return $list_status;
         }

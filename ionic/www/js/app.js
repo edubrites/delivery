@@ -124,6 +124,11 @@ angular.module('starter', [
                 templateUrl: 'templates/client/checkout_successful.html',
                 controller: 'ClientCheckoutSuccessfulCtrl'
             })
+            .state('client.order', {
+                url: "/order",
+                templateUrl: "templates/client/order.html",
+                controller: "ClientOrderCtrl"
+            })
             .state('client.view_products', {
                 url: '/view_products',
                 templateUrl: 'templates/client/view_products.html',
