@@ -2,8 +2,8 @@
 
 namespace App\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use App\Models\Cupom;
+use League\Fractal\TransformerAbstract;
 
 /**
  * Class CupomTransformer
@@ -21,13 +21,14 @@ class CupomTransformer extends TransformerAbstract
     public function transform(Cupom $model)
     {
         return [
-            'id'         => (int) $model->id,
-            'code'       => (string)$model->code,
+            'id'        => (int)$model->id,
+            'code'      => $model->code,
+            'value'     => (float)$model->value,
 
-            /* place your other model properties here */
+        /* place your other model properties here */
 
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+        'created_at'    => $model->created_at,
+        'updated_at'    => $model->updated_at
         ];
     }
 }
